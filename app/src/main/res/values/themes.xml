@@ -15,8 +15,7 @@
     </style>
 
     <style name="splashScreenTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="android:windowBackground">@drawable/ic_launcher_foreground</item>
-        <item name="background">@color/yellow </item>
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
 </resources>
