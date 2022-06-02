@@ -19,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
         Handler().postDelayed(Runnable {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }, SPLASH_DISPLAY_LENGTH)
     }
 }
