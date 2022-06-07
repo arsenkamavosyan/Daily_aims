@@ -2,17 +2,44 @@ package com.dailyaims
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.dailyaims.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
-    private var navController: NavController? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.bottomNavigationBar
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController=navHostFragment.navController
+        val navController = navHostFragment.navController
+        navView.setupWithNavController(navController)
+        navController.addOnDestinationChangedListener(object :NavController.OnDestinationChangedListener{
+            override fun onDestinationChanged(
+                controller: NavController,
+                destination: NavDestination,
+                arguments: Bundle?
+            ) {
+                when (destination.id){
+                    R.id.homeFragment ,R.id.statisticsFragment ->{
+                        navView.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        navView.visibility = View.GONE
+                    }
+                }
+            }
+
+        })
     }
 }

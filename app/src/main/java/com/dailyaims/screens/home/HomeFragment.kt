@@ -1,21 +1,20 @@
-package com.dailyaims.screens.splash.home
+package com.dailyaims.screens.home
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dailyaims.Aims
+import com.dailyaims.R
 import com.dailyaims.databinding.FragmentHomeBinding
-import com.dailyaims.screens.splash.recycler_view_adapter.AimsAdapter
+import com.dailyaims.screens.recycler_view_adapter.AimsAdapter
 
 class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private val aimsAdapter = AimsAdapter()
-
-    private var index = 0
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,10 +35,7 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = aimsAdapter
         btnFab.setOnClickListener {
-            if (index > 10) index = 0
-            val aims = Aims(title = "Title $index")
-            aimsAdapter.addAims(aims)
-            index++
+           findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
         }
     }
 }

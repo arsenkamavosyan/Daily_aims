@@ -7,7 +7,21 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.dailyaims.screens.splash.home.HomeFragment"
+        android:name="com.dailyaims.screens.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.dailyaims.screens.addtask.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_task" />
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.dailyaims.screens.statistics.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
 </navigation>
