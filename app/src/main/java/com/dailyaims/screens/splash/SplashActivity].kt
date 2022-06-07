@@ -10,7 +10,7 @@ import com.dailyaims.R
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
-    private final val SPLASH_DISPLAY_LENGTH = 3 * 1000L
+    private final val SPLASH_DISPLAY_LENGTH = 1 * 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.splashScreenTheme);
