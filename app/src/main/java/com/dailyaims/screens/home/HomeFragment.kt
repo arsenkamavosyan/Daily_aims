@@ -5,37 +5,48 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dailyaims.Aims
 import com.dailyaims.R
 import com.dailyaims.databinding.FragmentHomeBinding
-import com.dailyaims.screens.recycler_view_adapter.AimsAdapter
+import com.dailyaims.adapter.recycler_view_adapter.AimsAdapter
+import com.dailyaims.model.AimsModel
 
 class HomeFragment : Fragment() {
-    lateinit var binding: FragmentHomeBinding
-    private val aimsAdapter = AimsAdapter()
+
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
+        val viewModel = ViewModelProvider(this).get(HomeFragmentViewModel::class.java)
+        viewModel.initDataBase()
+        binding.btnFab.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
+        }
+        val aimsAdapter = AimsAdapter(object : AimsAdapter.EventListener {
+            override fun onItemClicked(aims: AimsModel) {
+                clickAims(aims)
+            }
+        })
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            hasFixedSize()
+            adapter = aimsAdapter
+        }
+        viewModel.getAllAims().observe(viewLifecycleOwner) { listAims ->
+            aimsAdapter.setList(listAims)
+        }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
-    }
-
-    private fun init() = with(binding) {
-        recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        recyclerView.adapter = aimsAdapter
-        btnFab.setOnClickListener {
-           findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
-        }
+    private fun clickAims(aimsModel: AimsModel) {
+        val bundle = Bundle()
+        bundle.putSerializable("Aims", aimsModel)
+        findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
     }
 }
