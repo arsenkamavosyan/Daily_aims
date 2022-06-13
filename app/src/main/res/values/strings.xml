@@ -3,11 +3,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
     <string name="statistics">Statistics</string>
-    <string name="edite">Edite</string>
+    <string name="edit">Edit</string>
     <string name="name">Name</string>
     <string name="miavor">Miavor</string>
     <string name="day_plan">Day Plan</string>
     <string name="replay">Replay</string>
     <string name="notifications">Notifications</string>
     <string name="create">Create</string>
+    <string name="qty">Qty</string>
+    <string name="km">Km</string>
+    <string name="meter">Meter</string>
+    <string name="minute">minute</string>
+    <string name="hour">Hour</string>
 </resources>
