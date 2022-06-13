@@ -15,19 +15,20 @@ import com.dailyaims.model.AimsModel
 
 
 class AddTaskFragment : Fragment() {
-    lateinit var binding:FragmentAddTaskBinding
+
+    private lateinit var binding: FragmentAddTaskBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAddTaskBinding.inflate(layoutInflater,container,false)
+        binding = FragmentAddTaskBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        val viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
 
         val type = arrayOf("hat", "km", "metr", "rope", "jam")
 
@@ -40,16 +41,12 @@ class AddTaskFragment : Fragment() {
         val editTextFilledExposedDropdown: AutoCompleteTextView =
             view.findViewById(R.id.filled_exposed_dropdown)
         editTextFilledExposedDropdown.setAdapter(adapter)
-    }
-
-    private fun init() {
-        val viewModel = ViewModelProvider(this ).get(   AddTaskFragmentViewModel::class.java)
 
         binding.btnCreate.setOnClickListener {
-            val title1 =binding.tiName.editText?.text.toString()
+            val title1 = binding.tiName.editText?.text.toString()
             val dayPlan = binding.tiDayplan.editText?.text.toString()
-            viewModel.insert(AimsModel(title =title1, description =dayPlan)){}
-            findNavController().navigate(R.id.homeFragment)
+            viewModel.insert(AimsModel(title = title1, description = dayPlan)) {}
+            findNavController().popBackStack()
         }
     }
 }

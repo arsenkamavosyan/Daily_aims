@@ -1,16 +1,17 @@
 package com.dailyaims.screens.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dailyaims.R
-import com.dailyaims.databinding.FragmentHomeBinding
 import com.dailyaims.adapter.recycler_view_adapter.AimsAdapter
+import com.dailyaims.adapter.recycler_view_adapter.EventListener
+import com.dailyaims.databinding.FragmentHomeBinding
 import com.dailyaims.model.AimsModel
 
 class HomeFragment : Fragment() {
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         binding.btnFab.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
         }
-        val aimsAdapter = AimsAdapter(object : AimsAdapter.EventListener {
+        val aimsAdapter = AimsAdapter(object : EventListener {
             override fun onItemClicked(aims: AimsModel) {
                 clickAims(aims)
             }
