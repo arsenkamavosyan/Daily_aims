@@ -1,4 +1,4 @@
-package com.dailyaims.adapter.recycler_view_adapter
+package com.dailyaims.adapter.eventlistener
 
 import com.dailyaims.model.AimsModel
 

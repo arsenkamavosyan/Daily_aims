@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dailyaims.R
 import com.dailyaims.databinding.FragmentAddTaskBinding
+import com.dailyaims.model.AimType
 import com.dailyaims.model.AimsModel
 
 
 class AddTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentAddTaskBinding
+    private lateinit var viewModel: AddTaskFragmentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +31,10 @@ class AddTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
 
-        val type = arrayOf("hat", "km", "metr", "rope", "jam")
+        viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
+
+        val type = AimType.values().map { getString(it.value) }
 
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),

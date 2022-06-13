@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dailyaims.R
 import com.dailyaims.adapter.recycler_view_adapter.AimsAdapter
-import com.dailyaims.adapter.recycler_view_adapter.EventListener
+import com.dailyaims.adapter.eventlistener.EventListener
 import com.dailyaims.databinding.FragmentHomeBinding
 import com.dailyaims.model.AimsModel
 
