@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.dailyaims.R
@@ -32,10 +31,10 @@ class AddTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       val aimsModel= arguments?.getSerializable("Aims") as? AimsModel
+        aimsModel
         viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
-
         val type = AimType.values().map { getString(it.value) }
-
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             R.layout.dropdown_menu_popup_item,
