@@ -32,6 +32,8 @@ class AddTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       val aimsModel= arguments?.getSerializable("Aims") as AimsModel?
+        aimsModel
         viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
 
         val type = AimType.values().map { getString(it.value) }

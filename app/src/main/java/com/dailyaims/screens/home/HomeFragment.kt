@@ -48,6 +48,6 @@ class HomeFragment : Fragment() {
     private fun clickAims(aimsModel: AimsModel) {
         val bundle = Bundle()
         bundle.putSerializable("Aims", aimsModel)
-        findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment)
+        findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment, bundle)
     }
 }
