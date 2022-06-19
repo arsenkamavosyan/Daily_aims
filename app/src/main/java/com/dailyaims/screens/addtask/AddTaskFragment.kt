@@ -13,12 +13,15 @@ import com.dailyaims.R
 import com.dailyaims.databinding.FragmentAddTaskBinding
 import com.dailyaims.model.AimType
 import com.dailyaims.model.AimsModel
+import java.util.*
 
 
 class AddTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentAddTaskBinding
     private lateinit var viewModel: AddTaskFragmentViewModel
+
+    private var isEdit: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,11 +33,19 @@ class AddTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-       val aimsModel= arguments?.getSerializable("Aims") as? AimsModel
-        aimsModel
         viewModel = ViewModelProvider(this).get(AddTaskFragmentViewModel::class.java)
-        val type = AimType.values().map { getString(it.value) }
+        val aimsModel = arguments?.getSerializable(ARGUMENT_KEY) as? AimsModel
+        isEdit = aimsModel != null
+        if (isEdit) {
+            binding.btnCreate.text = getString(R.string.edit)
+            binding.tiName.editText?.setText(aimsModel?.name)
+            binding.tiMiavor.editText?.setText(aimsModel?.type ?: "")
+            binding.tiDayplan.editText?.setText(aimsModel?.dayPLan)
+            binding.checkboxReplay.isChecked = aimsModel?.isReplay ?: false
+            binding.checkboxNotifications.isChecked = aimsModel?.isNotification ?: false
+        }
+
+        val type = AimType.values().map { it.value }
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
             R.layout.dropdown_menu_popup_item,
@@ -46,10 +57,26 @@ class AddTaskFragment : Fragment() {
         editTextFilledExposedDropdown.setAdapter(adapter)
 
         binding.btnCreate.setOnClickListener {
-            val title1 = binding.tiName.editText?.text.toString()
-            val dayPlan = binding.tiDayplan.editText?.text.toString()
-            viewModel.insert(AimsModel(title = title1, description = dayPlan)) {}
+            val id = if (isEdit) {
+                aimsModel?.id ?: "" // ete hin modeln a
+            } else {
+                UUID.randomUUID().toString() // ete nor model a
+            }
+
+            val model = AimsModel(
+                id = id,
+                name = binding.tiName.editText?.text.toString(),
+                type = binding.filledExposedDropdown.text.toString(),
+                dayPLan = binding.tiDayplan.editText?.text.toString(),
+                isReplay = binding.checkboxReplay.isChecked,
+                isNotification = binding.checkboxNotifications.isChecked
+            )
+            viewModel.insert(model) {}
             findNavController().popBackStack()
         }
+    }
+
+    companion object {
+        const val ARGUMENT_KEY = "ARGUMENT_KEY"
     }
 }

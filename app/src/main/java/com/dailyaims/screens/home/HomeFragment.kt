@@ -13,6 +13,7 @@ import com.dailyaims.adapter.recycler_view_adapter.AimsAdapter
 import com.dailyaims.adapter.eventlistener.EventListener
 import com.dailyaims.databinding.FragmentHomeBinding
 import com.dailyaims.model.AimsModel
+import com.dailyaims.screens.addtask.AddTaskFragment.Companion.ARGUMENT_KEY
 
 class HomeFragment : Fragment() {
 
@@ -47,7 +48,7 @@ class HomeFragment : Fragment() {
 
     private fun clickAims(aimsModel: AimsModel) {
         val bundle = Bundle()
-        bundle.putSerializable("Aims", aimsModel)
+        bundle.putSerializable(ARGUMENT_KEY, aimsModel)
         findNavController().navigate(R.id.action_homeFragment_to_addTaskFragment, bundle)
     }
 }

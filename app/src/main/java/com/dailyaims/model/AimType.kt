@@ -1,12 +1,19 @@
 package com.dailyaims.model
 
-import androidx.annotation.StringRes
-import com.dailyaims.R
+enum class AimType(val value: String) {
+    QTY("Qty"),
+    KM("Km"),
+    METER("Meter"),
+    MINUTE("minute"),
+    HOUR("Hour");
 
-enum class AimType(@StringRes val value: Int) {
-    QTY(R.string.qty),
-    KM(R.string.km),
-    METER(R.string.meter),
-    MINUTE(R.string.minute),
-    HOUR(R.string.hour)
+    fun getTypeFromString(value: String): AimType =
+        when (value) {
+            QTY.value -> QTY
+            KM.value -> KM
+            METER.value -> METER
+            MINUTE.value -> MINUTE
+            HOUR.value -> HOUR
+            else -> QTY
+        }
 }
