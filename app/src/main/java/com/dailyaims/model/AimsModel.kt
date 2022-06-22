@@ -7,10 +7,11 @@ import java.io.Serializable
 
 @Entity(tableName = "aims_table")
 data class AimsModel(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
-    @ColumnInfo
-    var title: String = "",
-    @ColumnInfo
-    val description: String = ""
-    ) : Serializable
+    @PrimaryKey(autoGenerate = false)
+    var id: String,
+    var name: String,
+    var type:String,
+    val dayPLan: String,
+    val isReplay: Boolean,
+    val isNotification: Boolean
+) : Serializable

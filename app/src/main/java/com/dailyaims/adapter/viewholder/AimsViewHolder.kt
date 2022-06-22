@@ -11,7 +11,7 @@ class AimsViewHolder(itemView: View) : ViewHolder(itemView) {
 
     private val binding = AimsLayoutBinding.bind(itemView)
     fun bind(aims: AimsModel, listener: EventListener) = with(binding) {
-        itemView.tv_title.text = aims.title.toString()
+        itemView.tv_title.text = aims.name.toString()
         itemView.setOnClickListener {
             listener.onItemClicked(aims)
         }
